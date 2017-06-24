@@ -5,15 +5,21 @@ import (
 	"flag"
 	"fmt"
 	"time"
+	"log"
 )
 
 func check(tocheck string) bool {
 	g, err := (&http.Client{Timeout: time.Second*3}).Get(tocheck)
 	if err != nil {
+		log.Printf("GET ERROR: %s\n", err.Error())
 		return false
 	}
 	defer g.Body.Close()
-	return g.StatusCode == http.StatusOK
+	if g.StatusCode != http.StatusOK {
+		log.Printf("BAD STATUS: %s\n", g.StatusCode)
+		return false
+	}
+	return true
 }
 
 func main() {
