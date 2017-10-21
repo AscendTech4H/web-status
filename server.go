@@ -33,5 +33,6 @@ func main() {
 			}
 			fmt.Fprintf(w, `<p style="color:%s">%s</p>`, color, chk)
 		}
+		fmt.Fprintf(w, `<p style="color:green">https://status.ascendtech4h.org</p>`)
 	}))
 }
